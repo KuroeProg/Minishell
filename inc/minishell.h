@@ -52,5 +52,10 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strtok(char *str, const char *delim, char **ptr_save);
 void		ft_init_commands(t_commands *commands);
 char		*ft_strcpy(char *dest, const char *src);
+int			ft_isdigit(char c);
 
+int			reco_commands(t_AST *ast, t_commands *commands);
+int			e_commands(char *str, t_commands *commands);
+int			other_commands(char *str, t_commands *commands);
+int			ft_strcmp(const char *first, const char *second);
 #endif
