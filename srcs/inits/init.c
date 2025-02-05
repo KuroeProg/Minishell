@@ -1,6 +1,12 @@
 #include "minishell.h"
 
-t_commands	*ft_init_commands(t_commands *commands)
+/*
+** Here, we initialized every part of our structures,
+** with strings, it will be useful when we will want to compare 
+** them. Also, check of the e_nodes in the .h, we will use it
+** too, also with the AST. 
+*/
+void	ft_init_commands(t_commands *commands)
 {
 	if (!commands)
 		return (NULL);

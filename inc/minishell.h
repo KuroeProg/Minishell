@@ -50,7 +50,7 @@ typedef struct	s_AST
 
 char		*ft_strchr(const char *s, int c);
 char		*ft_strtok(char *str, const char *delim, char **ptr_save);
-t_commands	*ft_init_commands(t_commands *commands);
+void		ft_init_commands(t_commands *commands);
 char		*ft_strcpy(char *dest, const char *src);
 
 #endif
