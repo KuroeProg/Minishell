@@ -50,3 +50,44 @@ void	exec_pipe(t_AST *node, char **envp)
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
+
+void	execute_ast(t_AST *node, char **envp)
+{
+	if (!node)
+		return ;
+	if (node->type == NODE_COMMAND)
+		exec_simple_cmd(node, envp);
+	if (node->type == NODE_PIPE)
+		exec_pipe(node, envp);
+	else if (node->type == NODE_REDIR_IN || node->type == NODE_REDIR_OUT || node->type == NODE_REDIR_APPEND)
+		exec_redir(node, envp);
+}
+
+void	exec_redir(t_AST *node, char **envp)
+{
+	int	fd;
+	int	backup;
+	int	std_fd;
+
+	if (!node || !node->filename)
+		return ;
+	if (node->type == NODE_REDIR_OUT)
+		fd = open(node->filename, O_WRONLY, O_CREAT, O_TRUNC, 0664);
+	if (node->type == NODE_REDIR_IN)
+		fd = open(node->filename, O_WRONLY, O_CREAT, O_APPEND, 0664);
+	if (node->type == NODE_REDIR_APPEND)
+		fd = open(node->filename, O_RDONLY);
+	else
+		return ;
+	if (fd == -1)
+		return (perror("open"));
+	std_fd = STDOUT_FILENO;
+	if (node->type == NODE_REDIR_IN)
+	std_fd = STDIN_FILENO;
+	backup = dup(std_fd);
+	dup2(fd, std_fd);
+	close(fd);
+	execute_ast(node->left, envp);
+	dup2(backup, std_fd);
+	close(backup);
+}
