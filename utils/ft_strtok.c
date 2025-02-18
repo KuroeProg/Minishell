@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 char	*ft_strtok(char *str, const char *delim, char **ptr_save)
 {

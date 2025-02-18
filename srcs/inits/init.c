@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 /*
 ** Here, we initialized every part of our structures,

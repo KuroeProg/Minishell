@@ -36,6 +36,7 @@ int	e_commands(char *str, t_commands *commands)
 	}
 	return (check);
 }
+
 int	other_commands(char *str, t_commands *commands)
 {
 	int	check;
